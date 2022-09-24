@@ -32,7 +32,7 @@ public class Group {
 	public Student searchStudentByLastName(String lastName) throws StudentNotFoundException {
 		for (int i = 0; i < students.length; i++) {
 			if (students[i] != null) {
-				if (students[i].getLastName() == lastName)
+				if (students[i].getLastName().equals(lastName))
 					return students[i];
 			}
 		}
@@ -61,6 +61,10 @@ public class Group {
 
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
+	}
+	
+	public Student[] getStudents() {
+		return students;
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package sample;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -11,8 +14,10 @@ public class Main {
 		Student student5 = new Student("Olga", "Olgienko", Gender.FEMALE, 4, "");
 		Student student6 = new Student("Natalia", "Natalenko", Gender.FEMALE, 5, "");
 		
+		InputStudent add = new InputStudent();
+		Student student7 = add.inputStudent();
+		
 		Group group1 = new Group("Group1");
-		Group group2 = new Group("Group2");
 		
 		try {
 			group1.addStudent(student1);
@@ -21,6 +26,7 @@ public class Main {
 			group1.addStudent(student4);
 			group1.addStudent(student5);
 			group1.addStudent(student6);
+			group1.addStudent(student7);
 		} catch (GroupOverflowException e) {
 			System.out.println(e.getMessage());
 		}
@@ -37,6 +43,27 @@ public class Main {
 		
 		group1.sortStudentsByLastName();
 		System.out.println(group1);
+		
+		CSVStringConverter convert = new CSVStringConverter();
+		
+		System.out.println(convert.toStringRepresentation(student7));
+		System.out.println(convert.fromStringRepresentaion("Dmytro;Zinkovskyi;MALE;8;Group1"));
+		
+		GroupFileStorage grStorage = new GroupFileStorage();
+		grStorage.saveGroupToCSV(group1);
+		
+		File file = new File("Group1.csv");
+		
+		System.out.println(grStorage.loadGroupFromCSV(file));
+		File folder = new File("/Users/dmytrozinkovskyi/JavaProjects/Java-OOP-050922/Students");
+		try {
+			if (grStorage.findFileByGroupName(group1.getGroupName(), folder) != null) {
+				System.out.println("File exists");
+			}
+			else System.out.println("File is not exist");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
  	}
 
 }
