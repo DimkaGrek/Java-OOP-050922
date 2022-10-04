@@ -1,0 +1,2 @@
+I want to count every letter.
+And I want to count every letter from second line too.
