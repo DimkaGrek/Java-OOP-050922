@@ -4,19 +4,18 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GroupFileStorage {
 
 	public void saveGroupToCSV(Group gr) {
 		CSVStringConverter convert = new CSVStringConverter();
-		Student[] students = gr.getStudents();
+		ArrayList<Student> students = gr.getStudents();
 		try(FileWriter file = new FileWriter(gr.getGroupName()+".csv")) {
-			for (int i = 0; i < students.length; i++) {
-				if (students[i] != null) {
-					file.write(convert.toStringRepresentation(students[i])+System.lineSeparator());
-//					System.out.println(convert.toStringRepresentation(students[i]));
-				}
+			for (Student student : students) {
+				file.write(convert.toStringRepresentation(student)+System.lineSeparator());
+//				System.out.println(convert.toStringRepresentation(student));
 			}
 			file.flush();
 		} catch (IOException e) {

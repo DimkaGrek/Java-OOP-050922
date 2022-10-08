@@ -1,11 +1,13 @@
 package sample;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class Group {
 	private String groupName;
-	private Student[] students = new Student[10];
+	private ArrayList<Student> students = new ArrayList<>();
 
 	public Group(String groupName) {
 		super();
@@ -18,41 +20,32 @@ public class Group {
 	}
 
 	public void addStudent(Student student) throws GroupOverflowException {
-		for (int i = 0; i < students.length; i++) {
-			if (students[i] == null) {
-				students[i] = student;
-				student.setGroupName(this.groupName);
-				return;
-			}
+		if (students.size() > 10) throw new GroupOverflowException("The group is overflow");
+		else {
+			student.setGroupName(this.groupName);
+			students.add(student);
 		}
-		throw new GroupOverflowException("The group is overflow");
-
 	}
 
 	public Student searchStudentByLastName(String lastName) throws StudentNotFoundException {
-		for (int i = 0; i < students.length; i++) {
-			if (students[i] != null) {
-				if (students[i].getLastName().equals(lastName))
-					return students[i];
-			}
+		for(Student student : students) {
+			if (student.getLastName().equals(lastName)) return student;
 		}
 		throw new StudentNotFoundException("This student does not exist");
 	}
 
 	public boolean removeStudentById(int id) {
-		for (int i = 0; i < students.length; i++) {
-			if (students[i] != null) {
-				if (students[i].getId() == id) {
-					students[i] = null;
-					return true;
-				}
+		for(Student student : students) {
+			if (student.getId()==id) {
+				students.remove(student);
+				return true;
 			}
 		}
 		return false;
 	}
 	
 	public void sortStudentsByLastName() {
-		Arrays.sort(students, Comparator.nullsLast(new LastNameComparator()));
+		Collections.sort(students, new LastNameComparator());
 	}
 
 	public String getGroupName() {
@@ -63,17 +56,15 @@ public class Group {
 		this.groupName = groupName;
 	}
 	
-	public Student[] getStudents() {
+	public ArrayList<Student> getStudents() {
 		return students;
 	}
 
 	@Override
 	public String toString() {
 		String result = groupName + System.lineSeparator();
-		for (int i = 0; i < students.length; i++) {
-			if (students[i] != null) {
-				result += students[i] + System.lineSeparator();
-			}
+		for (Student student: students) {
+			result += student + System.lineSeparator();
 		}
 		return result;
 	}
