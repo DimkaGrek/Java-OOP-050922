@@ -1,0 +1,37 @@
+Bill;Біл
+Gates;Гейтс
+was;був
+born;народжений
+in;в
+Seattle;Сіетл
+Washington;Вашингтон
+He;він
+he;він
+has;мав
+accomplished;досяг
+a lot;багато
+business;бізнес
+world;світ
+but;але
+his;його
+rise;зліт
+fame;слава
+came;прийшов
+when;коли
+developed;розвив
+Microsoft;Майкрософт
+lot;багато
+co-founded;співзаснував
+company;компанія
+with;з
+partner;партнер
+childhood;дитинство
+and;і
+friend;друг
+Allen;Ален
+Paul;Пол
+world’s;світу
+became;став
+largest;найбільший
+computer;компьютер
+software;програмне забеспечення
